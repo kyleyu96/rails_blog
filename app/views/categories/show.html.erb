@@ -1,0 +1,9 @@
+<h1><%= @category.name %></h1>
+
+<% if logged_in? && admin? %>
+  <%= link_to 'Edit', edit_category_path(@category) %>
+<% end %>
+
+<%= will_paginate @articles %>
+<%= render 'articles/list', articles: @articles %>
+<%= will_paginate @articles %>

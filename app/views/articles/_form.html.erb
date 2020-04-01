@@ -7,6 +7,9 @@
     <%= f.label :body %>
     <%= f.text_area :body, placeholder: 'Body of the article' %>
   </p>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+    <% cb.label { cb.check_box + cb.text } %>
+  <% end %>
   <p>
     <%= f.submit %>
   </p>

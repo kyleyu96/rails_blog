@@ -2,10 +2,15 @@
   <%= link_to a.title, article_path(a) %>
   <p><%= truncate(a.body, length: 150) %></p>
   <p>
-    Created by: <%= a.user.username %>, 
+    Created by: <%= a.user.username %>,
     <%= time_ago_in_words(a.created_at) %> ago,
     last updated <%= time_ago_in_words(a.updated_at) %> ago
   </p>
+
+  <% if a.categories.any? %>
+    <p>Categories</p>
+    <%= render a.categories %>
+  <% end %>
 
   <% if logged_in? && (admin? || current_user == a.user) %>
     <%= link_to 'Edit', edit_article_path(a) %>

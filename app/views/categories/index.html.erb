@@ -1,0 +1,10 @@
+<h1>Categories</h1>
+
+<%= will_paginate @categories %>
+
+<% @categories.each do |c| %>
+  <%= link_to c.name, category_path(c) %>
+  <%= pluralize(c.articles.count, 'article') %>
+<% end %>
+
+<%= will_paginate @categories %>

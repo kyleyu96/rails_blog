@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = 'You have successfully signed up.'
       redirect_to user_path(@user)
-    else 
+    else
       render 'new'
     end
   end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:username, :password)
   end
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   def require_admin
     if !admin?
       flash[:danger] = 'Only admin can delete a profile.'
-      redirect_to articles_path
+      redirect_to users_path
     end
   end
 

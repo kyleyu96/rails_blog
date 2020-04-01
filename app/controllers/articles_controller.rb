@@ -19,9 +19,9 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user = current_user
     if @article.save
-      flash[:success] = 'Your article was successfully created.'
+      flash[:success] = 'Your article was created successfully.'
       redirect_to article_path(@article)
-    else 
+    else
       render 'new'
     end
   end
@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, category_ids: [])
   end
 
   def find_article
