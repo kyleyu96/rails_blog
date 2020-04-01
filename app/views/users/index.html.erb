@@ -3,11 +3,11 @@
 <%= will_paginate @users %>
 
 <% @users.each do |u| %>
-	<%= link_to u.username, user_path(u) %>
-	<p><%= pluralize(u.articles.count, 'article') %></p>
-	<% if logged_in? && admin? %>
-		<%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %>
-	<% end %>
+  <%= link_to u.username, user_path(u) %>
+  <p><%= pluralize(u.articles.count, 'article') %></p>
+  <% if logged_in? && admin? %>
+    <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 <% end %>
 
 <%= will_paginate @users %>

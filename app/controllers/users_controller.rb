@@ -1,22 +1,22 @@
 class UsersController < ApplicationController
 
-	before_action :find_user, only: [:edit, :update, :show, :destroy]
+  before_action :find_user, only: [:edit, :update, :show, :destroy]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   before_action :require_admin, only: [:destroy]
 
-	def index
+  def index
     @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def new
-		@user = User.new
-	end
+    @user = User.new
+  end
 
-	def edit
-	end
+  def edit
+  end
 
-	def create
-		@user = User.new(user_params)
+  def create
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = 'You have successfully signed up.'
@@ -24,20 +24,20 @@ class UsersController < ApplicationController
     else 
       render 'new'
     end
-	end
+  end
 
-	def update
-		if @user.update(user_params)
+  def update
+    if @user.update(user_params)
       flash[:success] = 'Your profile was successfully updated.'
       redirect_to user_path(@user)
     else
       render 'edit'
     end
-	end
+  end
 
-	def show
-		@articles = @user.articles.paginate(page: params[:page], per_page: 5)
-	end
+  def show
+    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
+  end
 
   def destroy
     msg = "#{@user.username}'s profile and articles have been successfully deleted."
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-	private
+  private
   
   def user_params
     params.require(:user).permit(:username, :password)
