@@ -1,0 +1,14 @@
+<% articles.each do |a| %>
+  <%= link_to a.title, article_path(a) %>
+  <p><%= truncate(a.body, length: 150) %></p>
+  <p>
+  	Created by: <%= a.user.username %>, 
+  	<%= time_ago_in_words(a.created_at) %> ago,
+  	last updated <%= time_ago_in_words(a.updated_at) %> ago
+  </p>
+
+  <% if logged_in? && (admin? || current_user == a.user) %>
+    <%= link_to 'Edit', edit_article_path(a) %>
+    <%= link_to 'Delete', article_path(a), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>

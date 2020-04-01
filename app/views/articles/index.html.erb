@@ -1,11 +1,5 @@
 <h1>Articles</h1>
 
-<%= link_to 'Create a new article', new_article_path %>
-
-<% @articles.each do |a| %>
-  <p><%= a.title %></p>
-  <p><%= a.body %></p>
-  <%= link_to 'Edit', edit_article_path(a) %>
-  <%= link_to 'Read', article_path(a) %>
-  <%= link_to 'Delete', article_path(a), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<%= will_paginate @articles %>
+<%= render 'list', articles: @articles %>
+<%= will_paginate @articles %>
