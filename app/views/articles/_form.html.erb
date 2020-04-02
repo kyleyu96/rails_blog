@@ -5,7 +5,7 @@
   </p>
   <p>
     <%= f.label :body %>
-    <%= f.text_area :body, placeholder: 'Body of the article' %>
+    <%= f.text_area :body, rows: 10, placeholder: 'Body of the article' %>
   </p>
   <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
     <% cb.label { cb.check_box + cb.text } %>

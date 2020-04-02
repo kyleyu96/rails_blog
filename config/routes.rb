@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :articles
+  resources :articles do
+    resources :comments, only: [:create]
+  end
 
   get 'signup', to: 'users#new'
   resources :users, except: [:new]
@@ -12,5 +14,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   resources :categories, except: [:destroy]
+
+  mount ActionCable.server => '/cable'
 
 end

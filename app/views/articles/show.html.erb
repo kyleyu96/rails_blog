@@ -14,3 +14,20 @@
 <% end %>
 
 <%= link_to 'Back to listing', articles_path %>
+
+<% if logged_in? %>
+  <%= form_for [@article, @comment], remote: true do |f| %>
+    <p>
+      <%= f.text_area :description, rows: 3, placeholder: 'Add a comment.' %>
+    </p>
+    <p>
+      <%= f.submit 'Add' %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @article.comments.any? %>
+  <div id='notes'>
+    <%= render @article.comments %>
+  </div>
+<% end %>
