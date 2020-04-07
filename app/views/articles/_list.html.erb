@@ -1,19 +1,27 @@
 <% articles.each do |a| %>
-  <%= link_to a.title, article_path(a) %>
-  <p><%= truncate(a.body, length: 150) %></p>
-  <p>
-    Created by: <%= a.user.username %>,
-    <%= time_ago_in_words(a.created_at) %> ago,
-    last updated <%= time_ago_in_words(a.updated_at) %> ago
-  </p>
-
-  <% if a.categories.any? %>
-    <p>Categories</p>
-    <%= render a.categories %>
-  <% end %>
-
-  <% if logged_in? && (admin? || current_user == a.user) %>
-    <%= link_to 'Edit', edit_article_path(a) %>
-    <%= link_to 'Delete', article_path(a), method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
+  <div class="panel panel-default col-sm-offset-2 col-sm-8 no-padding">
+    <div class="panel-heading">
+      <h3><%= link_to a.title, article_path(a) %></h3>
+      <p><%= truncate(a.body, length: 250) %></p>
+      <small>
+        Created by <%= link_to a.user.username, user_path(a.user) %>
+        , <%= time_ago_in_words(a.created_at) %> ago<br />
+        Last updated <%= time_ago_in_words(a.updated_at) %> ago
+      </small>
+      <div class="row <%= 'space-above' if a.categories.any? %>">
+        <div class="col-xs-8">
+          <% if a.categories.any? %>
+            Categories: <%= render a.categories %>
+          <% end %>
+        </div>
+        <div class="col-xs-4 text-right">
+          <%= link_to 'View', article_path(a) %>
+          <% if logged_in? && (admin? || current_user == a.user) %>
+            | <%= link_to 'Edit', edit_article_path(a) %>
+            | <%= link_to 'Delete', article_path(a), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

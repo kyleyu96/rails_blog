@@ -1,10 +1,24 @@
-<h1>Categories</h1>
-
-<%= will_paginate @categories %>
-
-<% @categories.each do |c| %>
-  <%= link_to c.name, category_path(c) %>
-  <%= pluralize(c.articles.count, 'article') %>
-<% end %>
-
-<%= will_paginate @categories %>
+<div class="container">
+  <h1 class="page-title col-sm-offset-2">Categories</h1>
+  <% @categories.each do |c| %>
+    <div class="panel panel-default col-sm-offset-2 col-sm-8 no-padding">
+      <div class="panel-heading">
+        <h3 class="text-capitalize"><%= link_to c.name, category_path(c) %></h3>
+        <div class="row">
+          <div class="col-xs-6">
+            <p><%= pluralize(c.articles.count, 'article') %></p>
+          </div>
+          <div class="col-xs-6 text-right">
+            <%= link_to 'View', category_path(c) %>
+            <% if logged_in? && admin? %>
+              | <%= link_to 'Edit', edit_category_path(c) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div align="center">
+    <%= will_paginate @categories %>
+  </div>
+</div>

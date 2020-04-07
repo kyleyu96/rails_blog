@@ -1,16 +1,34 @@
-<%= form_for @article do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title, placeholder: 'Title of the article' %>
-  </p>
-  <p>
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 10, placeholder: 'Body of the article' %>
-  </p>
-  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
-    <% cb.label { cb.check_box + cb.text } %>
-  <% end %>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      <%= f.label :title %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_field :title, class: "form-control", placeholder: 'Title of the article', autofocus: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      <%= f.label :body, 'Content' %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_area :body, rows: 10, class: "form-control", placeholder: 'Body of the article' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      <label>Categories</label>
+    </div>
+    <div class="col-sm-8">
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+        <% cb.label(class: "checkbox-inline text-capitalize") { cb.check_box + cb.text } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.submit @article.new_record? ? 'Create' : 'Update', class: "btn btn-default" %>
+      <%= link_to 'Cancel', @article.new_record? ? articles_path : article_path(@article), class: "btn btn-default" %>
+    </div>
+  </div>
 <% end %>

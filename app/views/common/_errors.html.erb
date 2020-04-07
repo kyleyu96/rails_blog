@@ -1,8 +1,16 @@
 <% if obj.errors.any? %>
-  <h2><%= pluralize(obj.errors.count, 'Error') %>:</h2>
-  <ul>
-    <% obj.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h4><%= pluralize(obj.errors.count, 'Error') %>:</h4>
+          <ul>
+            <% obj.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

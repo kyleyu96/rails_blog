@@ -1,15 +1,29 @@
-<h1>Log in</h1>
+<div class="container">
 
-<%= form_for(:session, url: login_path) do |f| %>
-  <p>
-    <%= f.label :username %>
-    <%= f.text_field :username, placeholder: 'Enter username' %>
-  </p>
-  <p>
-    <%= f.label :password %>
-    <%= f.password_field :password, placeholder: 'Enter password' %>
-  </p>
-  <p>
-    <%= f.submit 'Log in' %>
-  </p>
-<% end %>
+  <h1 class="page-title col-sm-offset-2">Log In</h1>
+
+  <%= form_for(:session, :html => {class: "form-horizontal", role: "form"}, url: login_path) do |f| %>
+    <div class="form-group">
+      <div class="col-sm-2 control-label">
+        <%= f.label :username %>
+      </div>
+      <div class="col-sm-8">
+        <%= f.text_field :username, class: "form-control", placeholder: 'Enter username', autofocus: true %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2 control-label">
+        <%= f.label :password %>
+      </div>
+      <div class="col-sm-8">
+        <%= f.password_field :password, class: "form-control", placeholder: 'Enter password' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-8">
+        <%= f.submit 'Log in', class: "btn btn-default" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

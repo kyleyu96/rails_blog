@@ -1,33 +1,36 @@
-<h1><%= @article.title %></h1>
-<p><%= link_to @article.user.username, user_path(@article.user) %></p>
-
-<% if @article.categories.any? %>
-  <p>Categories</p>
-  <%= render @article.categories %>
-<% end %>
-
-<p><%= @article.body %></p>
-
-<% if logged_in? && (admin? || current_user == @article.user) %>
-  <%= link_to 'Edit', edit_article_path(@article) %>
-  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-<%= link_to 'Back to listing', articles_path %>
-
-<% if logged_in? %>
-  <%= form_for [@article, @comment], remote: true do |f| %>
-    <p>
-      <%= f.text_area :description, rows: 3, placeholder: 'Add a comment.' %>
-    </p>
-    <p>
-      <%= f.submit 'Add' %>
-    </p>
-  <% end %>
-<% end %>
-
-<% if @article.comments.any? %>
+<div class="container">
+  <h1 class="page-title col-sm-offset-2"><%= @article.title %></h1>
+  <div class="col-sm-offset-2 col-sm-8 no-padding">
+    <h5 class="article-details">
+      Created by <%= link_to @article.user.username, user_path(@article.user) %>
+      , <%= time_ago_in_words(@article.created_at) %> ago<br />
+      Last updated <%= time_ago_in_words(@article.updated_at) %> ago
+    </h5>
+    <div class="row <%= 'space-below' if @article.categories.any? %>">
+      <div class="col-xs-8 h5">
+        <% if @article.categories.any? %>
+          Categories: <%= render @article.categories %>
+        <% end %>
+      </div>
+      <div class="col-xs-4 text-right h5">
+        <% if logged_in? && (admin? || current_user == @article.user) %>
+          <%= link_to 'Edit', edit_article_path(@article) %>
+          | <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+    </div>
+    <p class="space-above space-below"><%= @article.body %></p>
+    <% if logged_in? %>
+      <%= form_for([@article, @comment], :html => {class: "space-below space-above", role: "form"}, remote: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :description, 'Comment', class: "sr-only" %>
+          <%= f.text_area :description, rows: 3, class: "form-control", placeholder: 'Add a comment.', id: "comment-form" %>
+        </div>
+        <%= f.submit 'Add', class: "btn btn-default" %>
+      <% end %>
+    <% end %>
+  </div>
   <div id='notes'>
     <%= render @article.comments %>
   </div>
-<% end %>
+</div>

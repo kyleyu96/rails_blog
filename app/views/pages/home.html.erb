@@ -1,1 +1,23 @@
-<h1>Homepage</h1>
+<div class="jumbotron">
+  <div class="container">
+    <h1>KY BLOG</h1>
+    <p>Write articles on topics you are passionate about and share with other users!</p>
+    <p>
+      <%= link_to 'Sign Up', signup_path, class: "btn btn-primary btn-lg", role: "button" %>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% Article.last(3).reverse.each do |a| %>
+      <div class="col-sm-4">
+        <h2><%= a.title %></h2>
+        <p><%= truncate(a.body, length: 150) %></p>
+        <p>
+          <%= link_to 'Read More', article_path(a), class: "btn btn-default", role: "button" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

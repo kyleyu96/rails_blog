@@ -1,13 +1,27 @@
-<h1>Users</h1>
-
-<%= will_paginate @users %>
-
-<% @users.each do |u| %>
-  <%= link_to u.username, user_path(u) %>
-  <p><%= pluralize(u.articles.count, 'article') %></p>
-  <% if logged_in? && admin? %>
-    <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="container">
+  <h1 class="page-title col-sm-offset-2">Users</h1>
+  <% @users.each do |u| %>
+    <div class="panel panel-default col-sm-offset-2 col-sm-8 no-padding">
+      <div class="panel-heading">
+        <h3><%= link_to u.username, user_path(u) %></h3>
+        <div class="row">
+          <div class="col-xs-6">
+            <p><%= pluralize(u.articles.count, 'article') %></p>
+          </div>
+          <div class="col-xs-6 text-right">
+            <%= link_to 'View', user_path(u) %>
+            <% if logged_in? && current_user == u %>
+              | <%= link_to 'Edit', edit_user_path(u) %>
+            <% end %>
+            <% if logged_in? && admin? %>
+              | <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-<% end %>
-
-<%= will_paginate @users %>
+  <div align="center">
+    <%= will_paginate @users %>
+  </div>
+</div>

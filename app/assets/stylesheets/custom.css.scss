@@ -1,0 +1,52 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.alert {
+  margin-top: 20px;
+}
+
+.page-title {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.new-article {
+  font-weight: bold;
+  color: white;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.category-chip {
+  font-size: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.chip {
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  &:hover {
+    color: white;
+  }
+}
+
+.space-below {
+  padding-bottom: 20px;
+}
+
+.space-above {
+  padding-top: 20px;
+}
+
+.article-details {
+  margin-top: 0px;
+}
