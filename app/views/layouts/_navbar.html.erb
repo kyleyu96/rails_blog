@@ -22,7 +22,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to 'All Categories', categories_path %></li>
-            <li role="separator" class="divider"></li>
+            <% if Category.any? %>
+              <li role="separator" class="divider"></li>
+            <% end %>
             <% Category.all.each do |c| %>
               <li class="text-capitalize"><%= link_to c.name, category_path(c) %></li>
             <% end %>
