@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    redirect_to articles_path if logged_in?
   end
 
   def edit
